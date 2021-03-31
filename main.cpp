@@ -25,14 +25,28 @@ ld pi = 3.1415926535897932384626433832795028841971693993751058209749445923;
 string charlist = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
 
+void xsleep(int x)
+{
+    #ifdef _WIN32
+    Sleep(x);
+    #else
+    sleep(x);
+    #endif
+}
 
-void gotoxy(int x, int y) { 
+
+void gotoxy(int x, int y) {
+    #ifdef _WIN32
     COORD pos = {x, y};
     HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(output, pos);
+    #else
+    printf("\x1B[%d;%dH", y, x);
+    #endif
 }
 
 void clearC() {
+    #ifdef _WIN32
     COORD topLeft  = { 0, 0 };
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO screen;
@@ -42,11 +56,10 @@ void clearC() {
     FillConsoleOutputCharacterA(
         console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written
     );
-    // FillConsoleOutputAttribute(
-    //     console, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE,
-    //     screen.dwSize.X * screen.dwSize.Y, topLeft, &written
-    // );
     SetConsoleCursorPosition(console, topLeft);
+    #else
+    printf("\033[2J");
+    #endif
 }
 
 void clearBuff0(int height=100, int width=100)
