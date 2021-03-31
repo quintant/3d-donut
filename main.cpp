@@ -3,6 +3,7 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
+sleep = Sleep
 #endif
 
 using namespace std;
@@ -153,7 +154,7 @@ int main(){
             }
         }
 
-        q+=pi/80;
+        q+=pi/60;
 
         
         // clearC();
@@ -218,7 +219,7 @@ int main(){
             
         }
         buff_num ^= true;
-        Sleep(133);
+        
         for (int i = 0; i < 200; i++)
         {
             for (int o = 0; o < 200; o++)
@@ -227,7 +228,7 @@ int main(){
                 screenB[i][o] = false;
             }
         }
-        
+        Sleep(133);
         
         
     }
