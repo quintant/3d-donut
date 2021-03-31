@@ -29,37 +29,37 @@ void xsleep(int x)
 {
     #ifdef _WIN32
     Sleep(x);
-    #else
-    sleep(x);
+    // #else
+    // sleep(x);
     #endif
 }
 
 
 void gotoxy(int x, int y) {
-    #ifdef _WIN32
-    COORD pos = {x, y};
-    HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(output, pos);
-    #else
+    // #ifdef _WIN32
+    // COORD pos = {x, y};
+    // HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+    // SetConsoleCursorPosition(output, pos);
+    // #else
     printf("\x1B[%d;%dH", y, x);
-    #endif
+    // #endif
 }
 
 void clearC() {
-    #ifdef _WIN32
-    COORD topLeft  = { 0, 0 };
-    HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO screen;
-    DWORD written;
-
-    GetConsoleScreenBufferInfo(console, &screen);
-    FillConsoleOutputCharacterA(
-        console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written
-    );
-    SetConsoleCursorPosition(console, topLeft);
-    #else
+    // #ifdef _WIN32
+    // COORD topLeft  = { 0, 0 };
+    // HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+    // CONSOLE_SCREEN_BUFFER_INFO screen;
+    // DWORD written;
+// 
+    // GetConsoleScreenBufferInfo(console, &screen);
+    // FillConsoleOutputCharacterA(
+        // console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written
+    // );
+    // SetConsoleCursorPosition(console, topLeft);
+    // #else
     printf("\033[2J");
-    #endif
+    // #endif
 }
 
 void clearBuff0(int height=100, int width=100)
@@ -116,7 +116,7 @@ void *renderer(void *arg)
 
 int main(){
     // cin.tie(nullptr);
-
+    ios_base::sync_with_stdio(0); cin.tie(0);
     pthread_t thread1;
     pthread_create(&thread1, NULL, renderer, NULL);
 
@@ -167,7 +167,7 @@ int main(){
             }
         }
 
-        q+=pi/60;
+        q+=pi/100;
 
         
         // clearC();
