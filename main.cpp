@@ -3,7 +3,6 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
-typedef Sleep sleep;
 #endif
 
 using namespace std;
