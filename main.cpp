@@ -241,7 +241,7 @@ int main(){
                 screenB[i][o] = false;
             }
         }
-        Sleep(133);
+        xsleep(133);
         
         
     }
