@@ -3,6 +3,7 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
+#include <pthread.h>
 #endif
 
 using namespace std;
